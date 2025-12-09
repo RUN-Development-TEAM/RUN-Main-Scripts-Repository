@@ -149,6 +149,8 @@ switch(Object_Name)
             Bedroom_Drawer_State = false;
         }
         break;
-    }
+        case "Computer"
+        
+}
 }
 }
