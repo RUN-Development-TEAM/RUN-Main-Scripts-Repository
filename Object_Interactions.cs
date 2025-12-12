@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 public class Object_Interactions : MonoBehaviour
 {
-//
+RaycastHit hitinfo;
+
 public LayerMask ObjectLayer;
 public LayerMask DoorLayer;
 private string Door_Name;
@@ -28,23 +30,25 @@ private bool Livingroom_Door_State = false;
 private bool Fridge_State = false;
 private bool Microwave_State = false;
 private bool Bedroom_Drawer_State = false;
+private bool Computer_State = false;
+
+public GameObject Computer_System;
+
 
 void Update()
 {
  if (Input.GetKeyDown(KeyCode.E))
  {
- RaycastHit hit;
     if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 6f, ObjectLayer))
     {
-
+    Object_Name = hitinfo.collider.GameObject.name;
     } 
  }
  if (Input.GetKeyDown(KeyCode.E))
  {
- RaycastHit hit;
-    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 6f, ObjectLayer))
+    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 6f, DoorLayer))
     {
-        
+    Door_Name = hitinfo.collider.GameObject.name;   
     } 
  }
  switch(Door_Name)
@@ -149,8 +153,16 @@ switch(Object_Name)
             Bedroom_Drawer_State = false;
         }
         break;
-        case "Computer"
-        
+        case "Computer":
+        if(Computer_State)
+        {
+        Computer_System.SetActive(true);
+        }
+        else
+        {
+        Computer_System.SetActive(false);     
+        }
+        break;
 }
 }
 }
